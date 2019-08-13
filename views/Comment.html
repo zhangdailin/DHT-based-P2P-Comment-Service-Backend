@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Comment</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/customize.css">
+    <link rel="stylesheet" href="/stylesheets/welcome.css">
+    <link rel="stylesheet" href="/stylesheets/customer_olcourse.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        var number;
+
+        $(function() {
+            $.ajax({
+                type: 'GET',
+                url: '/Comment/all',
+                success: function (reqdata) {
+                    number = reqdata.length;
+                    console.log(number);
+                    Commentinfo(reqdata);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        });
+      
+        function  Commentinfo(data){
+             data.forEach(function(test){
+                 $clone = $("#test").clone();
+                 $clone.find("#URL_Adress").text(test.URL);
+                 $clone.find("#Comment").text(test.Value);
+                 $("#CommentContainer").append($clone);
+                 $clone.show();
+             });
+         }
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">DHT-based P2P comment service</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/Comment">All Comment</a></li>
+            <li><a href="/addComment">Specific Website Comment</a></li>
+        </ul>
+    </div>
+</nav>
+<style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    /* Add a gray background color and some padding to the footer */
+    footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+    }
+</style>
+<!--//left manu-->
+
+<div class="container">
+    <div class="row" >
+        <div class="col-md-2">
+        </div>
+        <div class="col-lg-6 col-md-8">
+            <h3>Comments list</h3>
+            <table class="table table-hover" id="CommentContainer">
+                <tr>
+                    <th id="URL_Adress">URL Adress</th>
+                    <th id="Comment">Comment</th>
+                </tr>
+                <tbody >
+                <tr id="test">
+                    <td id="URL_Adress"></td>
+                    <td id="Comment"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

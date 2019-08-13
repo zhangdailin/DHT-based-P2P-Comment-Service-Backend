@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Specific Website Comment</title>
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/stylesheets/customize.css">
+      <link rel="stylesheet" href="/stylesheets/welcome.css">
+      <link rel="stylesheet" href="/stylesheets/customer_olcourse.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script type="text/javascript">
+         var number;
+         var url =  getQueryVariable("id");
+         console.log(url);
+         $(function() {
+             $.ajax({
+                 type: 'GET',
+                 url: '/addComment/add/test?id='+url,
+                 success: function (reqdata) {
+                     number = reqdata.length;
+                     console.log(number);
+                     courseinfo(reqdata);
+                 },
+                 error: function (jqXHR, textStatus, errorThrown) {
+                     console.log(errorThrown);
+                 }
+             });
+         });
+         function  courseinfo(data){
+             data.forEach(function(course){
+                 $clone = $("#course").clone();
+                 $clone.find("#courseName").text(course.Value);
+                 $("#courseContainer").append($clone);
+                 $clone.show();
+             });
+         }
+         function getQueryVariable(variable)
+         {
+         var query = window.location.search.substring(1);
+         var vars = query.split("&");
+         for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+         }
+         return(false);
+         }
+      </script>
+      <script type="text/javascript">
+         var url =  getQueryVariable("id");
+         function openInNewTab(url) {
+             var win = window.open(url, '/addComment/');
+             win.focus();
+         }
+         $(function(){
+             $('#btnAddcourse').click(function()
+             {
+                 console.log('select_link clicked');
+                 var data = {};
+                 $("#courseform").serializeArray().map(function(x){data[x.name] = x.value;})
+                 data["URL_Address"]=url;
+                 var formData = JSON.stringify(data);
+         
+                 console.log("["+formData+"]");
+         
+                 console.log("we are here")
+                 $("#result").empty();
+                 // console.log("Sending to: "+$("#signupForm").attr('action'));
+         
+         
+                 $.ajax(
+                     {
+                         type: 'PUT',
+                         crossDomain: true,
+                         url: '/addComment/',
+                         contentType: 'application/json',
+                         data: JSON.stringify(data),
+                         success: function( responseData, textStatus, jqXHR )
+                         {
+                             console.log("success");
+                             console.log(responseData);
+                             console.log(textStatus);
+                         },
+                         error: function(jqXHR, textStatus, errorThrown)
+                         {
+                             console.log(errorThrown);
+                         }
+         
+                     });
+         function getQueryVariable(variable)
+         {
+         var query = window.location.search.substring(1);
+         var vars = query.split("&");
+         for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+         }
+         return(false);
+         }
+                 location.reload();
+                 return false;
+             });
+         
+         });
+      </script>
+   </head>
+   <body>
+      <nav class="navbar navbar-default">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <a class="navbar-brand" href="/">DHT-based P2P comment service</a>
+            </div>
+            <ul class="nav navbar-nav">
+               <li><a href="/">Home</a></li>
+               <li><a href="/Comment">All Comment</a></li>
+               <li class="active"><a href="/addComment">Specific Website Comment</a></li>
+            </ul>
+         </div>
+      </nav>
+      <style>
+         /* Remove the navbar's default margin-bottom and rounded borders */
+         .navbar {
+         margin-bottom: 0;
+         border-radius: 0;
+         }
+         /* Add a gray background color and some padding to the footer */
+         footer {
+         background-color: #f2f2f2;
+         padding: 25px;
+         }
+      </style>
+      <div class="container">
+         <div class="row" >
+            <div class="col-md-2">
+            </div>
+            <div class="col-lg-6 col-md-8">
+               <form id="courseform">
+                 <h3>Comment at there!</h3> 
+                  <table class="table table-hover">
+                     <tr>
+                     <textarea rows="10" cols="50" name="Value"></textarea>
+                     </tr>
+                     <tr><button id="btnAddcourse">Submit</button></tr>
+                        <div class="form-btn">
+                           <label class="warn"><%=errMsg %></label>
+                        </div>
+                  </table>
+               </form>
+            </div>
+         </div>
+         <div class="row" >
+            <div class="col-md-2">
+            </div>
+            <div class="col-lg-6 col-md-8">
+               <table class="table table-hover" id="courseContainer">
+                  <tbody id="course">
+                     <tr>
+                        <td id="courseName">
+                           <h3>People's comments: </h3>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,33 @@
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  
+div.bottom{
+    background-color:#484848;
+    /*height: 200px;*/
+    width:100%;
+    position: fixed;
+    bottom: 0px;
+    /*top:80%;*/
+}
+
+a{
+  font-size:100%;
+  color:#C0C0C0;
+}
+
+a:hover { 
+    background-color: #686868;
+    text-decoration: none;
+    color:#C0C0C0;
+}
+
+h1{
+  color:white;
+}
+
+p{
+  color:white;
+}

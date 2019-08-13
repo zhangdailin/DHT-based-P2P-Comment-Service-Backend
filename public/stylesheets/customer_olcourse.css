@@ -1,0 +1,40 @@
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 70%;
+      margin: auto;
+  }
+  
+div.left{
+    background-color:#484848;
+    height: 100%;
+    position: fixed;
+    left: 0px;
+}
+
+a.left{
+ font-size:100%;
+  color:#C0C0C0;
+  position: absolute;
+  left:30px;
+  
+}
+
+a.left:hover { 
+    color:#C0C0C0;
+    background-color: #686868;
+    text-decoration: none;
+}
+
+h1.left{
+  color:white;
+  
+}
+
+p{
+  color:white;
+}
+
+.navbar{
+  margin-bottom: 0px;
+}
+
