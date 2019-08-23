@@ -31,9 +31,9 @@
          });
          function  courseinfo(data){
              data.forEach(function(course){
-                 $clone = $("#course").clone();
-                 $clone.find("#courseName").text(course.Value);
-                 $("#courseContainer").append($clone);
+                 $clone = $("#comment").clone();
+                 $clone.find("#commentValue").text(course.Value);
+                 $("#commentContainer").append($clone);
                  $clone.show();
              });
          }
@@ -55,11 +55,11 @@
              win.focus();
          }
          $(function(){
-             $('#btnAddcourse').click(function()
+             $('#btnAddcomment').click(function()
              {
                  console.log('select_link clicked');
                  var data = {};
-                 $("#courseform").serializeArray().map(function(x){data[x.name] = x.value;})
+                 $("#commentform").serializeArray().map(function(x){data[x.name] = x.value;})
                  data["URL_Address"]=url;
                  var formData = JSON.stringify(data);
          
@@ -136,13 +136,13 @@
             <div class="col-md-2">
             </div>
             <div class="col-lg-6 col-md-8">
-               <form id="courseform">
+               <form id="commentform">
                  <h3>Comment at there!</h3> 
                   <table class="table table-hover">
                      <tr>
                      <textarea rows="10" cols="50" name="Value"></textarea>
                      </tr>
-                     <tr><button id="btnAddcourse">Submit</button></tr>
+                     <tr><button id="btnAddcomment">Submit</button></tr>
                         <div class="form-btn">
                            <label class="warn"><%=errMsg %></label>
                         </div>
@@ -154,10 +154,10 @@
             <div class="col-md-2">
             </div>
             <div class="col-lg-6 col-md-8">
-               <table class="table table-hover" id="courseContainer">
-                  <tbody id="course">
+               <table class="table table-hover" id="commentContainer">
+                  <tbody id="comment">
                      <tr>
-                        <td id="courseName">
+                        <td id="commentValue">
                            <h3>People's comments: </h3>
                         </td>
                      </tr>
