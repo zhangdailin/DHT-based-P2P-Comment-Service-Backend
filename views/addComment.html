@@ -30,9 +30,9 @@
              });
          });
          function  courseinfo(data){
-             data.forEach(function(course){
+             data.forEach(function(comment){
                  $clone = $("#comment").clone();
-                 $clone.find("#commentValue").text(course.Value);
+                 $clone.find("#commentValue").text(comment.Value);
                  $("#commentContainer").append($clone);
                  $clone.show();
              });
