@@ -22,14 +22,14 @@
                  success: function (reqdata) {
                      number = reqdata.length;
                      console.log(number);
-                     courseinfo(reqdata);
+                     commentinfo(reqdata);
                  },
                  error: function (jqXHR, textStatus, errorThrown) {
                      console.log(errorThrown);
                  }
              });
          });
-         function  courseinfo(data){
+         function  commentinfo(data){
              data.forEach(function(comment){
                  $clone = $("#comment").clone();
                  $clone.find("#commentValue").text(comment.Value);

@@ -32,7 +32,7 @@ ipfs.on('ready', async(err,results) => {
 Comment.prototype.addComment=function(callback){
     const comment={
         URL: this.URL,
-        Value: this.Value
+        Value: this.Value.replace(/fuck/g, '*')
     }
     const id = uuid()
     db.put({_id: id, URL: comment.URL, Value: comment.Value})
